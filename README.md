@@ -32,8 +32,8 @@ cat sql/target.sql | mysql -p -u root -h 192.168.99.100
 
 ``` 
 mvn clean package
-java -jar target/bq-demo-0.0.1-SNAPSHOT.jar 
-java -jar target/bq-demo-0.0.1-SNAPSHOT.jar --server --config=test.yml
+java -jar target/lm-demo-0.0.1-SNAPSHOT.jar 
+java -jar target/lm-demo-0.0.1-SNAPSHOT.jar  --exec --job=sync --config=test.yml
 ```
 
 

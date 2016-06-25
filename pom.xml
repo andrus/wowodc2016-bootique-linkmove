@@ -2,6 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>com.nhl.bootique.parent</groupId>
+		<artifactId>bootique-parent</artifactId>
+		<version>0.10</version>
+	</parent>
+
 	<groupId>com.objectstyle</groupId>
 	<artifactId>lm-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -13,6 +19,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<main.class>com.objectstyle.lm_demo.App</main.class>
 	</properties>
 
 	<dependencyManagement>
@@ -60,4 +67,13 @@
 			<version>1.7</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-shade-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
