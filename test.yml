@@ -1,0 +1,14 @@
+jdbc:
+  website:
+    url: "jdbc:mysql://192.168.99.100:3306/website?connectTimeout=0&autoReconnect=true"
+    initialSize: 1
+    username: root
+    password: root
+  scheduling:
+    url: "jdbc:postgresql://192.168.99.100:5432/scheduling"
+    initialSize: 1
+    username: postgres
+    password: postgres
+
+cayenne:
+  datasource: website

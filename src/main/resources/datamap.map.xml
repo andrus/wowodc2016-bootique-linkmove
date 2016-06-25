@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-map xmlns="http://cayenne.apache.org/schema/7/modelMap"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://cayenne.apache.org/schema/7/modelMap http://cayenne.apache.org/schema/7/modelMap.xsd"
+	 project-version="7">
+	<property name="defaultPackage" value="com.objectstyle.lm_demo.cayenne"/>
+	<property name="defaultCatalog" value="website"/>
+	<db-entity name="w_game" catalog="website">
+		<db-attribute name="arena" type="VARCHAR" isMandatory="true" length="45"/>
+		<db-attribute name="away_score" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="date_time" type="TIMESTAMP" isMandatory="true" length="19"/>
+		<db-attribute name="home_score" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="home_team_id" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
+		<db-attribute name="visiting_team_id" type="INTEGER" isMandatory="true" length="10"/>
+	</db-entity>
+	<db-entity name="w_game_event" catalog="website">
+		<db-attribute name="game_id" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
+		<db-attribute name="period" type="INTEGER" isMandatory="true" length="10"/>
+		<db-attribute name="time_in_period" type="VARCHAR" isMandatory="true" length="45"/>
+		<db-attribute name="type" type="VARCHAR" isMandatory="true" length="45"/>
+	</db-entity>
+	<db-entity name="w_team" catalog="website">
+		<db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
+		<db-attribute name="name" type="VARCHAR" isMandatory="true" length="45"/>
+	</db-entity>
+	<obj-entity name="WGame" className="com.objectstyle.lm_demo.cayenne.WGame" dbEntityName="w_game">
+		<obj-attribute name="arena" type="java.lang.String" db-attribute-path="arena"/>
+		<obj-attribute name="awayScore" type="java.lang.Integer" db-attribute-path="away_score"/>
+		<obj-attribute name="dateTime" type="java.util.Date" db-attribute-path="date_time"/>
+		<obj-attribute name="homeScore" type="java.lang.Integer" db-attribute-path="home_score"/>
+	</obj-entity>
+	<obj-entity name="WGameEvent" className="com.objectstyle.lm_demo.cayenne.WGameEvent" dbEntityName="w_game_event">
+		<obj-attribute name="period" type="java.lang.Integer" db-attribute-path="period"/>
+		<obj-attribute name="timeInPeriod" type="java.lang.String" db-attribute-path="time_in_period"/>
+		<obj-attribute name="type" type="java.lang.String" db-attribute-path="type"/>
+	</obj-entity>
+	<obj-entity name="WTeam" className="com.objectstyle.lm_demo.cayenne.WTeam" dbEntityName="w_team">
+		<obj-attribute name="name" type="java.lang.String" db-attribute-path="name"/>
+	</obj-entity>
+	<db-relationship name="homeTeam" source="w_game" target="w_team" toMany="false">
+		<db-attribute-pair source="home_team_id" target="id"/>
+	</db-relationship>
+	<db-relationship name="visitingTeam" source="w_game" target="w_team" toMany="false">
+		<db-attribute-pair source="visiting_team_id" target="id"/>
+	</db-relationship>
+	<db-relationship name="wGameEvents" source="w_game" target="w_game_event" toMany="true">
+		<db-attribute-pair source="id" target="game_id"/>
+	</db-relationship>
+	<db-relationship name="game" source="w_game_event" target="w_game" toMany="false">
+		<db-attribute-pair source="game_id" target="id"/>
+	</db-relationship>
+	<db-relationship name="wGames" source="w_team" target="w_game" toMany="true">
+		<db-attribute-pair source="id" target="home_team_id"/>
+	</db-relationship>
+	<db-relationship name="wGames1" source="w_team" target="w_game" toMany="true">
+		<db-attribute-pair source="id" target="visiting_team_id"/>
+	</db-relationship>
+	<obj-relationship name="gameEvents" source="WGame" target="WGameEvent" deleteRule="Deny" db-relationship-path="wGameEvents"/>
+	<obj-relationship name="homeTeam" source="WGame" target="WTeam" deleteRule="Nullify" db-relationship-path="homeTeam"/>
+	<obj-relationship name="visitingTeam" source="WGame" target="WTeam" deleteRule="Nullify" db-relationship-path="visitingTeam"/>
+	<obj-relationship name="game" source="WGameEvent" target="WGame" deleteRule="Nullify" db-relationship-path="game"/>
+	<obj-relationship name="wGames" source="WTeam" target="WGame" deleteRule="Deny" db-relationship-path="wGames"/>
+	<obj-relationship name="wGames1" source="WTeam" target="WGame" deleteRule="Deny" db-relationship-path="wGames1"/>
+</data-map>

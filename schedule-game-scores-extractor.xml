@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://nhl.github.io/link-move/xsd/extractor_config_2.xsd"
+	xmlns="http://nhl.github.io/link-move/xsd/extractor_config_2.xsd">
+
+	<type>json</type>
+	<connectorId>file:/Users/wowodc/Documents/workspace/lm-demo/gamescores.json</connectorId>
+
+	<extractor>
+
+		<attributes>
+			<attribute>
+				<type>int</type>
+				<source>id</source>
+				<target>db:id</target>
+			</attribute>
+			<attribute>
+				<type>int</type>
+				<source>homeScore</source>
+				<target>homeScore</target>
+			</attribute>
+			<attribute>
+				<type>int</type>
+				<source>awayScore</source>
+				<target>awayScore</target>
+			</attribute>
+		</attributes>
+		<properties>
+			<extractor.json.path>$.[*]</extractor.json.path>
+		</properties>
+	</extractor>
+</config>
